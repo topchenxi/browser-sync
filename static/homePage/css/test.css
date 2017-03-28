@@ -1,0 +1,9 @@
+body {
+    background-color: #ccc;
+    width: 100%;
+}
+
+#array {
+    background-color: red;
+    font-size: 20px;
+}

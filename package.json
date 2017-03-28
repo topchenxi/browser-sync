@@ -1,0 +1,14 @@
+{
+    "name": "browser-sync",
+    "version": "0.0.1",
+    "description": "browser-sync to refresh browser",
+    "author": "c.c.",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^2.18.8",
+        "run-sequence": "^1.2.2"
+    },
+    "dependencies": {
+        "glup": "^1.0.14"
+    }
+}
