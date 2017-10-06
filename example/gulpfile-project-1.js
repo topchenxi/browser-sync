@@ -27,6 +27,8 @@ gulp.task('clean', function() {
     return del(['dist', 'tmp']);
 });
 
+var pkg = JSON.parse(fs.readFileSync('package.json'));
+
 /*
  * 合并请求
  * <!-- build:css ../css/index.pkg.css --><!-- endbuild -->
