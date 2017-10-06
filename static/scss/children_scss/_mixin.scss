@@ -1,0 +1,30 @@
+body
+{
+    font-size: 14px;
+}
+
+@mixin clearfix()
+{
+    *zoom: 1;
+    &:before,
+    &:after
+    {
+        display: table;
+
+        content: ' ';
+    }
+    &:after
+    {
+        clear: both;
+    }
+}
+
+.top
+{
+    width: 400px;
+}
+
+.hello
+{
+    background: #fff url() 0 0 no-repeat;
+}

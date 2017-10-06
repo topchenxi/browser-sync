@@ -1,0 +1,280 @@
+body{
+    overflow-x: hidden;
+    background-color: #fff;
+    font-family: Helvetica,Arial,'Microsoft YaHei','Tahoma',sans-serif;
+}
+.banner{
+    width: 100%;
+    height: 640px;
+    position: relative;
+    overflow: hidden;
+    .bannerBox{
+        background: url(../images/cfec/spec-appDownload/banner.jpg) no-repeat center top;
+        position: absolute;
+        width: 1920px;
+        height: 640px;
+        top: 0;
+        left: 50%;
+        margin-left: -960px;
+        z-index: 1;
+
+        -webkit-animation-name: big2small;
+                animation-name: big2small;
+        -webkit-animation-duration: 25s;
+                animation-duration: 25s;
+        -webkit-animation-delay: 0;
+                animation-delay: 0;
+        -webkit-animation-fill-mode: forwards;
+                animation-fill-mode: forwards;
+        -webkit-animation-timing-function: linear;
+                animation-timing-function: linear;
+        -webkit-transform-origin: 50% 50%;
+                transform-origin: 50% 50%;
+        -webkit-animation-iteration-count:1;
+                animation-iteration-count:1;
+    }
+    .container{
+        position: relative;
+        z-index: 2;
+        .logo{
+            position: absolute;
+            top: 40px;
+            left: 0; 
+            display: block;
+            img{
+                display: block;
+            }
+        }
+        h1{
+            font-size: 72px;
+            color: #000;
+            font-weight: normal;
+            position: absolute;
+            top: 170px;
+            left: 0;
+            span{
+                color: #e50000;
+            }
+        }
+        p{
+            font-size: 36px;
+            color: #000;
+            position: absolute;
+            top: 255px;
+            left: 0;
+        }
+        .linkA{
+            display: block;
+            width: 140px;
+            height: 48px;
+            overflow: hidden;
+            text-indent: -999px;
+            position: absolute;
+            top: 340px;
+        }
+        .ios{
+            background: url(../images/cfec/spec-appDownload/appStore.png) no-repeat 0 0;
+            left: 0;
+        }
+        .andriod{
+            background: url(../images/cfec/spec-appDownload/googlePlay.png) no-repeat 0 0;
+            left: 162px;
+        }
+    }
+}
+.area{
+    height: 800px;
+    margin-bottom: 0;
+    .container{
+        height: 100%;
+        position: relative;
+        .bgImg{
+            display: block;
+            position: absolute;
+        }
+        .parallaxBox{
+            position: relative;
+            img{
+                position: absolute;
+            }
+        }
+        .text{
+            width: 50%;
+            position: absolute;
+            h2{
+                font-size: 58px;
+                line-height: 72px;
+                color: #333;
+                font-weight: normal;
+            }
+            p{
+                font-size: 30px;
+                line-height: 42px;
+                color: #999;
+            }
+        }
+    }
+}
+.p1{
+    .container{
+        .bgImg{
+            top: 119px;
+            right: 81px;
+        }
+        #img1-1{
+            right: -35px;
+            top: 215px;
+        }
+        #img1-2{
+            right: 25px;
+            top: 495px;
+        }
+        #img1-3{
+            left: 715px;
+            top: 315px;
+        }
+        .text{
+            top: 282px; 
+            left: 0;
+        }
+    }
+}
+.p2{
+    background-color: #f6f6f6;
+    .container{
+        .bgImg{
+            top: 120px;
+            left: 14px;
+        }
+        #img2-1{
+            left: -71px;
+            top: 300px;
+        }
+        #img2-2{
+            left: 90px;
+            top: 400px;
+        }
+        #img2-3{
+            left: 412px;
+            top: 155px; 
+        }
+        .text{
+            width: 512px;
+            top: 275px;
+            right: 0;
+        }
+    }
+}
+.p3{
+    .container{
+        .bgImg{
+            top: 117px;
+            right: 80px;
+        }
+        #img3-1{
+            right: 378px;
+            top: 190px;
+        }
+        #img3-2{
+            right: -30px;
+            top: 335px;
+        }
+        #img3-3{
+            right: 327px;
+            top: 380px; 
+        }
+        .text{
+            top: 326px;
+            left: 0;
+        }
+    }
+}
+.p4{
+    background-color: #f6f6f6;
+    .container{
+        .bgImg{
+            top: 120px;
+            left: 14px;
+        }
+        #img4-1{
+            left: 90px;
+            top: 300px;
+        }
+        #img4-2{
+            left: -71px;
+            top: 400px;
+        }
+        #img4-3{
+            left: -71px; 
+            top: 200px;
+        }
+        .text{
+            top: 324px;
+            right: 0;
+            h2{
+                font-size: 56px;
+            }
+        }
+    }
+}
+.p5{
+    .container{
+        .bgImg{
+            top: 122px;
+            right: 80px;
+        }
+        #img5-1{
+            right: 427px;
+            top: 261px;
+        }
+        #img5-2{
+            right: -33px;
+            top: 384px;
+        }
+        .text{
+            width: 485px;
+            top: 326px;
+            left: 0;
+        }
+    }
+}
+/*big2small*/
+@-webkit-keyframes big2small {
+  0%
+  {
+    -webkit-transform:translate(0, 0) scale(1.06) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            transform:translate(0, 0) scale(1.06) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
+  }
+  100%
+  {
+    -webkit-transform:translate(0, 0) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            transform:translate(0, 0) scale(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+.goTop {
+    line-height: 48px;
+    position: fixed;
+    z-index: 9;
+    right: 2%;
+    bottom: 220px;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+}
+
+.goTop a {
+    font-size: 0;
+    display: block;
+    overflow: hidden;
+    width: 48px;
+    height: 48px;
+    text-indent: -9999px;
+    color: #fff;
+    background: url(../../global/images/backTop.png) no-repeat center 19px #ddd;
+}
+
+.goTop a:hover {
+    background-color: #e74445;
+}

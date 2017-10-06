@@ -1,14 +1,55 @@
 {
-    "name": "browser-sync",
-    "version": "0.0.1",
-    "description": "browser-sync to refresh browser",
-    "author": "c.c.",
-    "license": "ISC",
-    "devDependencies": {
-        "browser-sync": "^2.18.8",
-        "run-sequence": "^1.2.2"
-    },
-    "dependencies": {
-        "glup": "^1.0.14"
-    }
+  "name": "gulp",
+  "version": "1.0.1",
+  "description": "awesome of gulp",
+  "keywords": [
+    "gulp",
+    "css",
+    "less",
+    "scss",
+    "javascript"
+  ],
+  "homepage": "https://github.com/topchenxi",
+  "author": "c.c. <469770982@qq.com>",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "browser-sync": "^2.18.13",
+    "browserify": "^14.4.0",
+    "cssnano": "^3.10.0",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-header": "^1.8.9",
+    "gulp-help": "^1.6.1",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-less": "^3.3.2",
+    "gulp-markdown": "^1.2.0",
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^8.0.0",
+    "gulp-rev-collector": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-stylus": "^2.6.0",
+    "gulp-typescript": "^3.2.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp.spritesmith": "^6.5.1",
+    "imagemin-pngquant": "^5.0.1",
+    "run-sequence": "^2.2.0",
+    "typescript": "^2.5.3",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "gulp-babel": "^7.0.0"
+  }
 }

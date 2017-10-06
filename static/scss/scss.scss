@@ -1,0 +1,15 @@
+@import 'children_scss/mixin';
+
+.nav{
+    @include clearfix;
+}
+
+.warp{
+    display: flex;
+    border-radius: 5px;
+    transform:translateY(-50%);
+    transform:rotate(30deg);
+    box-shadow: 10px 10px 5px #888888;
+    transform:scale(2);
+    transition:all 2s;
+}
