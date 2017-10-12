@@ -1,4 +1,5 @@
-const gulp = require('gulp'),
+const
+    gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     rev = require('gulp-rev'),
     plumber = require('gulp-plumber');

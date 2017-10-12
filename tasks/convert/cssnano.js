@@ -1,10 +1,11 @@
-const cssnano = require('cssnano'),
+const
+    cssnano = require('cssnano'),
     gulp = require('gulp'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
     autoprefixer = require('gulp-autoprefixer'),
     plumber = require('gulp-plumber');
-    
+
 module.exports = () => {
     return gulp.src(['./static/css/cssnano/*.css', './static/css/cssnano/**/*.css'])
         .pipe(plumber())

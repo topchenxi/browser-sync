@@ -1,6 +1,6 @@
-var gulp = require('gulp');
-// 合成sprite图片插件
-var spritesmith = require('gulp.spritesmith');
+const
+    gulp = require('gulp'),
+    spritesmith = require('gulp.spritesmith');
 
 module.exports = () => {
     return gulp.src(['static/sprites/*.png', 'static/sprites/**/*.png'])

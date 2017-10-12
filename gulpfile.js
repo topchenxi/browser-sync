@@ -6,24 +6,25 @@ const [BUILD_PATH, CONVERT_PATH, WHOLE_PATH] = ['./tasks/build/', './tasks/conve
 const [gulp, runSequence] = [require('gulp-help')(require('gulp')), require('run-sequence')];
 
 // 任务
-const cleanTask = require(BUILD_PATH + 'clean');
-const lessTask = require(BUILD_PATH + 'less');
-const scssTask = require(BUILD_PATH + 'scss');
-const stylusTask = require(BUILD_PATH + 'stylus');
-const es6Task = require(BUILD_PATH + 'es6');
-const tsTask = require(BUILD_PATH + 'ts');
-const mdTask = require(BUILD_PATH + 'md');
+const
+    cleanTask = require(BUILD_PATH + 'clean'),
+    lessTask = require(BUILD_PATH + 'less'),
+    scssTask = require(BUILD_PATH + 'scss'),
+    stylusTask = require(BUILD_PATH + 'stylus'),
+    es6Task = require(BUILD_PATH + 'es6'),
+    tsTask = require(BUILD_PATH + 'ts'),
+    mdTask = require(BUILD_PATH + 'md'),
 
-const cssnanoTask = require(CONVERT_PATH + 'cssnano');
-const revcssTask = require(CONVERT_PATH + 'revcss');
-const uglifyTask = require(CONVERT_PATH + 'uglify');
-const revCollectorTask = require(CONVERT_PATH + 'revCollector');
-const addHeaderTask = require(CONVERT_PATH + 'addHeader');
+    cssnanoTask = require(CONVERT_PATH + 'cssnano'),
+    revcssTask = require(CONVERT_PATH + 'revcss'),
+    uglifyTask = require(CONVERT_PATH + 'uglify'),
+    revCollectorTask = require(CONVERT_PATH + 'revCollector'),
+    addHeaderTask = require(CONVERT_PATH + 'addHeader'),
 
-const imageTask = require(CONVERT_PATH + 'image');
-const spriteTask = require(CONVERT_PATH + 'sprite');
+    imageTask = require(CONVERT_PATH + 'image'),
+    spriteTask = require(CONVERT_PATH + 'sprite'),
 
-const cssTask = require(WHOLE_PATH + 'css');
+    cssTask = require(WHOLE_PATH + 'css');
 
 // 任务
 // 删除 dist文件夹
@@ -66,4 +67,3 @@ gulp.task('default', ['clean'], callback => {
     // 同步运行任务插件
     runSequence(['clean', 'less', 'scss', 'stylus', 'es6', 'ts', 'cssnano', 'revcss', 'uglify', 'addHeader', 'image', 'sprite'], callback);
 });
-

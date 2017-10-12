@@ -1,4 +1,5 @@
-const fs = require('fs'),
+const
+    fs = require('fs'),
     gulp = require('gulp'),
     header = require('gulp-header'),
     plumber = require('gulp-plumber'),
