@@ -443,3 +443,13 @@ template {
 [hidden] {
   display: none;
 }
+
+.images{
+  width: 100px;
+  height: 100px;
+  background: url(../../images/1.jpg) 0 0 no-repeat;
+}
+
+.show{
+  display: block!important;
+}

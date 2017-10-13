@@ -20,6 +20,7 @@ const
     uglifyTask = require(CONVERT_PATH + 'uglify'),
     revCollectorTask = require(CONVERT_PATH + 'revCollector'),
     addHeaderTask = require(CONVERT_PATH + 'addHeader'),
+    base64Task = require(CONVERT_PATH + 'base64'),
 
     imageTask = require(CONVERT_PATH + 'image'),
     spriteTask = require(CONVERT_PATH + 'sprite'),
@@ -54,6 +55,8 @@ gulp.task('uglify', uglifyTask);
 
 // 添加头部信息
 gulp.task('addHeader', addHeaderTask);
+
+gulp.task('base64', base64Task);
 // 压缩图片
 gulp.task('image', imageTask);
 // 合并sprite图 

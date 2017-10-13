@@ -1,35 +1,20 @@
-/** 
- * 组件安装 
- * npm install gulp gulp-notify gulp-livereload gulp-sass gulp-rename gulp-autoprefixer gulp-cssnano jshint gulp-jshint gulp-uglify gulp-concat gulp-imagemin del --save-dev 
- * 
- */
-
 // 引入 gulp及组件  
-let gulp = require('gulp'), //基础库  
-    notify = require('gulp-notify'), //通知  
-
-    //tinylr = require('tiny-lr'),               //livereload  
-    //server = tinylr(),  
-    //port = 35729,  
-    livereload = require('gulp-livereload'), //livereload  
-
-    sass = require('gulp-sass'), //sass  
-    rename = require('gulp-rename'), //重命名  
-    autoprefixer = require('gulp-autoprefixer'), // 处理css中浏览器兼容的前缀  
-    cssnano = require('gulp-cssnano'), // css的层级压缩合并  
-
-    jshint = require('gulp-jshint'), //js检查 ==> npm install --save-dev jshint gulp-jshint（.jshintrc：https://my.oschina.net/wjj328938669/blog/637433?p=1）  
-    uglify = require('gulp-uglify'), //js压缩  
-    concat = require('gulp-concat'), //合并文件  
-
-    imagemin = require('gulp-imagemin'), //图片压缩  
-
-    del = require('del'); //清空文件  
-
-
-let SRC_DIR = './src/'; // 源文件目录  
-let DIST_DIR = './dist/'; // 文件处理后存放的目录  
-let DIST_FILE = DIST_DIR + '**'; // 目标路径下的所有文件  
+let gulp = require('gulp'),
+    notify = require('gulp-notify'),
+    livereload = require('gulp-livereload'),
+    sass = require('gulp-sass'),
+    rename = require('gulp-rename'),
+    autoprefixer = require('gulp-autoprefixer'),
+    cssnano = require('gulp-cssnano'),
+    jshint = require('gulp-jshint'),
+    uglify = require('gulp-uglify'),
+    concat = require('gulp-concat'),
+    imagemin = require('gulp-imagemin'),
+    del = require('del');
+    
+let SRC_DIR = './src/';
+let DIST_DIR = './dist/';
+let DIST_FILE = DIST_DIR + '**';
 
 const Config = {
     html: {
@@ -37,42 +22,28 @@ const Config = {
         dist: DIST_DIR
     },
     assets: {
-        src: SRC_DIR + 'assets/**/*', // assets目录：./src/assets  
-        dist: DIST_DIR + 'assets' // assets文件build后存放的目录：./dist/assets  
+        src: SRC_DIR + 'assets/**/*',
+        dist: DIST_DIR + 'assets'
     },
     css: {
-        src: SRC_DIR + 'css/**/*.css', // CSS目录：./src/css/  
-        dist: DIST_DIR + 'css' // CSS文件build后存放的目录：./dist/css  
+        src: SRC_DIR + 'css/**/*.css',
+        dist: DIST_DIR + 'css'
     },
     sass: {
-        src: SRC_DIR + 'scss/**/*.scss', // SCSS目录：./src/scss/  
-        dist: DIST_DIR + 'css' // SCSS文件生成CSS后存放的目录：./dist/css  
+        src: SRC_DIR + 'scss/**/*.scss',
+        dist: DIST_DIR + 'css'
     },
     js: {
-        src: SRC_DIR + 'js/**/*.js', // JS目录：./src/js/  
-        dist: DIST_DIR + 'js', // JS文件build后存放的目录：./dist/js  
-        build_name: 'build.js' // 合并后的js的文件名  
+        src: SRC_DIR + 'js/**/*.js',
+        dist: DIST_DIR + 'js',
+        build_name: 'build.js'
     },
     img: {
-        src: SRC_DIR + 'images/**/*', // images目录：./src/images/  
-        dist: DIST_DIR + 'images' // images文件build后存放的目录：./dist/images  
+        src: SRC_DIR + 'images/**/*',
+        dist: DIST_DIR + 'images'
     }
 };
 
-/** 
- * copy任务（复制不需要处理的文件到dist目录下） 
- */
-/*let copyTasks = [ 
-    'html', 'assets' 
-]; // 定义单纯的复制功能的列表 
-gulp.task('copy', function () { 
-    for (let i = 0; i < copyTasks.length; i++) { 
-        let key = copyTasks[i]; 
-        gulp.src(Config[key].src) 
-            .pipe(gulp.dest(Config[key].dist)); 
-        //.pipe(notify({ message: key + ' task complete' })); 
-    } 
-});*/
 
 /** 
  * HTML处理 
@@ -164,7 +135,7 @@ gulp.task('images', function() {
     return gulp.src(Config.img.src)
         .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
         .pipe(gulp.dest(Config.img.dist))
-        /*.pipe(notify({ message: 'images task complete' }))*/
+    /*.pipe(notify({ message: 'images task complete' }))*/
     ;
 });
 
