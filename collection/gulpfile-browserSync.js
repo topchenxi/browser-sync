@@ -1,9 +1,10 @@
-const gulp = require('gulp'),
+const
+    gulp = require('gulp'),
     babel = require('gulp-babel'),
     stylus = require('gulp-stylus'),
     browserSync = require('browser-sync'),
     autoprefixer = require('gulp-autoprefixer');
-    
+
 gulp.task('stylus', () => {
     return gulp.src(['./static/stylus/*.styl', './static/stylus/**/*.styl'])
         .pipe(stylus())
@@ -38,7 +39,8 @@ gulp.task('browserSync', () => {
         }
     })
 });
-gulp.task('watch', ['babel', 'browserSync', 'stylus'], function() {
+
+gulp.task('watch', ['babel', 'browserSync', 'stylus'], () => {
     gulp.watch('static/**/*.styl', ['stylus']);
     gulp.watch('static/**/*.js', ['babel']);
     gulp.watch('*.html', browserSync.reload);

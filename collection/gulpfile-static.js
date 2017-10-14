@@ -17,10 +17,9 @@ let gulp = require('gulp'),
 
 const staticEntry = 'static';
 
-gulp.task('buildCSS', function() {
-
+gulp.task('buildCSS', () => {
     const staticPath = `${staticEntry}/*`;
-    return gulp.src(staticPath).pipe(through.obj(function(file, enc, callback) {
+    return gulp.src(staticPath).pipe(through.obj((file, enc, callback) => {
         if (file.isDirectory() && file.relative != 'cfec') {
             let path = `${staticEntry}/${file.relative}/less`;
             gulp.src([`${path}/*.less`, `${path}/**/*.less`])
@@ -36,7 +35,7 @@ gulp.task('buildCSS', function() {
 })
 
 
-gulp.task('compressFile', function(callback) {
+gulp.task('compressFile', (callback) => {
     const staticPath = [`${staticEntry}/**/*.js`, `${staticEntry}/**/*.css`];
     return gulp.src(staticPath)
         .pipe(plumber())
@@ -47,22 +46,22 @@ gulp.task('compressFile', function(callback) {
 
 let text = '';
 
-gulp.task('initMD5Content', function() {
+gulp.task('initMD5Content', () => {
     const staticPath = [`${staticEntry}/**/*.js`, `${staticEntry}/**/*.css`];
-    return gulp.src(staticPath).pipe(through.obj(function(file, enc, callback) {
+    return gulp.src(staticPath).pipe(through.obj((file, enc, callback) => {
         let filePath = file.relative;
         text += filePath.slice(0, filePath.lastIndexOf('.')).replace(/[\\\/\&\-\.]/g, '_') + '=' + revHash(file.contents) + '\n';
         callback();
     }))
 })
 
-gulp.task('buildMD5', ['initMD5Content'], function() {
+gulp.task('buildMD5', ['initMD5Content'], () => {
     const filePath = '';
     fs.writeFile(`${filePath}filemd5.text`, text);
     fs.writeFile(`${filePath}filemd5.php`, '<?php\n' + text + '?>\n');
 })
 
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch('static/**/*.less', ['buildCSS']);
 })

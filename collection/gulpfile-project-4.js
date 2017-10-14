@@ -1,67 +1,55 @@
-var gulp = require('gulp');
-var del = require('del');
-var rev = require('gulp-rev');
-var nano = require('gulp-cssnano');
-var uglify = require('gulp-uglify')
-var useref = require('gulp-useref');
-var imagemin = require('gulp-imagemin');
-var revCollector = require('gulp-rev-collector');
-var browserSync = require('browser-sync').create();
-var gulpSequence = require('gulp-sequence');
-var uncss = require('gulp-uncss');
-var htmlmin = require('gulp-htmlmin');
-var base64 = require('gulp-base64');
-var changed = require('gulp-changed');
-var postcss = require("gulp-postcss");
-var sprites = require('postcss-sprites').default;
-var autoprefixer = require('autoprefixer');
-var cssgrace = require('cssgrace');
+const
+    gulp = require('gulp'),
+    del = require('del'),
+    rev = require('gulp-rev'),
+    nano = require('gulp-cssnano'),
+    uglify = require('gulp-uglify'),
+    useref = require('gulp-useref'),
+    imagemin = require('gulp-imagemin'),
+    revCollector = require('gulp-rev-collector'),
+    browserSync = require('browser-sync').create(),
+    gulpSequence = require('gulp-sequence'),
+    uncss = require('gulp-uncss'),
+    htmlmin = require('gulp-htmlmin'),
+    base64 = require('gulp-base64'),
+    changed = require('gulp-changed'),
+    postcss = require("gulp-postcss"),
+    sprites = require('postcss-sprites').default,
+    autoprefixer = require('autoprefixer'),
+    cssgrace = require('cssgrace');
+const
+    SRC_DIR = './src/',
+    PKG_DIR = './tmp/pkg/',
+    REV_DIR = './tmp/rev/',
+    DST_DIR = './dist/',
+    UNCSS_REG = [/.advise/, /.block/, /.g-bd .m-view-2 .category li:nth-child/, /^.g-bd ul li .info/, /.hljs/];
 
-var SRC_DIR = './src/';
-var PKG_DIR = './tmp/pkg/';
-var REV_DIR = './tmp/rev/';
-var DST_DIR = './dist/';
-var UNCSS_REG = [/.advise/, /.block/, /.g-bd .m-view-2 .category li:nth-child/, /^.g-bd ul li .info/, /.hljs/];
-
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     return del(['dist', 'tmp']);
 });
-
 /*
  * 合并请求
  * <!-- build:css ../css/index.pkg.css --><!-- endbuild -->
  * <!-- build:js ../js/index.pkg.js --><!-- endbuild -->
  */
-gulp.task('pkg', function() {
+gulp.task('pkg', () => {
     return gulp.src(SRC_DIR + 'view/*.html')
         .pipe(useref())
         .pipe(gulp.dest(PKG_DIR + 'view/'));
 });
-
-/*
- * 移动非jpg/png资源到img文件夹
- * 
- */
-gulp.task('move-img-other', function() {
+// 移动非jpg/png资源到img文件夹
+gulp.task('move-img-other', () => {
     return gulp.src([SRC_DIR + 'img/**/*.*!(jpg|png)', SRC_DIR + 'component/img/**/*.*!(jpg|png)'])
         .pipe(gulp.dest('./tmp/pkg/img/'));
 });
-
-/*
- * 压缩IMG
- * 
- */
-gulp.task('min-img', function() {
+// 压缩IMG
+gulp.task('min-img', () => {
     return gulp.src([SRC_DIR + 'img/**/*.*(jpg|png)', SRC_DIR + 'component/img/**/*.*(jpg|png)'])
         .pipe(imagemin())
         .pipe(gulp.dest('./tmp/pkg/img/'));
 });
-
-/*
- * 压缩CSS(PC)
- * 
- */
-gulp.task("min-css-pc", function() {
+// 压缩CSS(PC)
+gulp.task("min-css-pc", () => {
     // PostCSS
     var processors = [
         sprites({
@@ -85,12 +73,8 @@ gulp.task("min-css-pc", function() {
         .pipe(postcss(processors))
         .pipe(gulp.dest(PKG_DIR + 'css/'))
 });
-
-/*
- * 压缩CSS(Mobile)
- * 
- */
-gulp.task("min-css-mobile", function() {
+// 压缩CSS(Mobile)
+gulp.task("min-css-mobile", () => {
     // PostCSS
     var processors = [
         autoprefixer({
@@ -109,82 +93,54 @@ gulp.task("min-css-mobile", function() {
         .pipe(postcss(processors))
         .pipe(gulp.dest(PKG_DIR + 'css/'))
 });
-
-/*
- * 压缩JS
- * 
- */
-gulp.task('min-js', function() {
+// 压缩JS
+gulp.task('min-js', () => {
     return gulp.src(PKG_DIR + 'js/**/*.js')
         .pipe(uglify())
         .pipe(gulp.dest(PKG_DIR + 'js/'));
 });
-
-/*
- * 版本化IMG
- * 
- */
-gulp.task('rev-img', function() {
+// 版本化IMG
+gulp.task('rev-img', () => {
     return gulp.src(PKG_DIR + 'img/**/*')
         .pipe(rev())
         .pipe(gulp.dest(REV_DIR + 'img/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest(REV_DIR + 'img/'));
 });
-
-/*
- * 版本化CSS
- * 
- */
-gulp.task('rev-css', function() {
+// 版本化CSS
+gulp.task('rev-css', () => {
     return gulp.src(PKG_DIR + 'css/**/*')
         .pipe(rev())
         .pipe(gulp.dest(REV_DIR + 'css/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest(REV_DIR + 'css/'));
 });
-
-/*
- * 版本化JS
- * 
- */
-gulp.task('rev-js', function() {
+// 版本化JS
+gulp.task('rev-js', () => {
     return gulp.src(PKG_DIR + 'js/**/*')
         .pipe(rev())
         .pipe(gulp.dest(REV_DIR + 'js/'))
         .pipe(rev.manifest())
         .pipe(gulp.dest(REV_DIR + 'js/'));
 });
-
-/*
- * 收集图片到CSS
- */
-gulp.task('col-css', function() {
+// 收集图片到CSS
+gulp.task('col-css', () => {
     return gulp.src([REV_DIR + 'img/*.json', REV_DIR + 'css/*.css'])
         .pipe(revCollector())
         .pipe(gulp.dest(DST_DIR + 'css/'));
 });
-
-/*
- * 移动IMG文件到目标文件夹
- */
-gulp.task('col-img', function() {
+// 移动IMG文件到目标文件夹
+gulp.task('col-img', () => {
     return gulp.src([REV_DIR + 'img/*', '!' + REV_DIR + '/img/*.json'])
         .pipe(gulp.dest(DST_DIR + 'img/'));
 });
-
-/*
- * 移动JS文件到目标文件夹
- */
-gulp.task('col-js', function() {
+// 移动JS文件到目标文件夹
+gulp.task('col-js', () => {
     return gulp.src(REV_DIR + 'js/*.js')
         .pipe(gulp.dest(DST_DIR + 'js/'));
 });
-
-/*
- * 收集资源到HTML
- */
-gulp.task('col-html', function() {
+// 收集资源到HTML
+gulp.task('col-html', () => {
     return gulp.src([REV_DIR + '**/*.json', PKG_DIR + 'view/*.html'])
         .pipe(revCollector())
         .pipe(htmlmin({
@@ -193,31 +149,21 @@ gulp.task('col-html', function() {
         }))
         .pipe(gulp.dest(DST_DIR + 'view/'));
 });
-
-/*
- * 移动mock文件夹
- */
-gulp.task('move-mock', function() {
+// 移动mock文件夹
+gulp.task('move-mock', () => {
     return gulp.src(SRC_DIR + 'mock/**/*')
         .pipe(gulp.dest(DST_DIR + 'mock/'));
 });
-
-/*
- * 图片base64
- */
-gulp.task('base64', function() {
+// 图片base64
+gulp.task('base64', () => {
     return gulp.src(PKG_DIR + '/**/*.css')
         .pipe(base64({
             extensions: ['svg', 'png', /\.jpg#datauri$/i],
         }))
         .pipe(gulp.dest(PKG_DIR));
 });
-
-
-/*
- * 静态服务器
- */
-gulp.task('bs', function() {
+// 静态服务器
+gulp.task('bs', () => {
     browserSync.init({
         files: "**", //监听整个项目
         open: "external",
@@ -227,33 +173,22 @@ gulp.task('bs', function() {
         }
     });
 });
-
-/*
- * 静态服务器(代理)
- */
-gulp.task('bsp', function() {
+// 静态服务器(代理)
+gulp.task('bsp', () => {
     browserSync.init({
         proxy: "127.0.0.1"
     });
 });
-
-/*
- * PC打包方案
- */
+// PC打包方案
 gulp.task('pc', gulpSequence(
     'clean', 'pkg', 'min-img', ['min-img', 'min-css-pc', 'min-js'], 'move-img-other', ['rev-img', 'rev-css', 'rev-js'], ['col-img', 'col-css', 'col-js', 'col-html'],
     'move-mock', 'bs'
 ));
-
-/*
- * Mobile打包方案
- */
+// Mobile打包方案
 gulp.task('mobile', gulpSequence(
     'clean', 'pkg', 'min-img', 'base64', 'move-img-other', ['min-img', 'min-css-mobile', 'min-js'], ['rev-img', 'rev-css', 'rev-js'], ['col-img', 'col-css', 'col-js', 'col-html'],
     'move-mock', 'bs'
 ));
-
-
-gulp.task('default', ['mobile'], function() {
+gulp.task('default', ['mobile'], () => {
     return del(['tmp/']);
 });

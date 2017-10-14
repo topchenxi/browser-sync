@@ -1,4 +1,4 @@
-/* 依赖包加载 	*/
+/* 依赖包加载    */
 const path = require('path'),
     gulp = require('gulp'),
 
@@ -27,7 +27,7 @@ const path = require('path'),
     newer = require('gulp-newer'), //增量更新
     mocha = require('gulp-mocha'); //单元测试
 
-/* 主文件 	*/
+/* 主文件  */
 
 let webpackConfig = {
     resolve: {
@@ -101,11 +101,11 @@ const dist = {
   build
  */
 let BUILD = "DEV";
-gulp.task('views', function() {
+gulp.task('views', () => {
     return gulp.src(src.views)
         .pipe(gulp.dest(dist.views));
 });
-gulp.task('sass', function() {
+gulp.task('sass', () => {
     return gulp.src(src.sass)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
@@ -114,12 +114,12 @@ gulp.task('sass', function() {
         .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('reload', function() {
+gulp.task('reload', () => {
 
     webpackConfig.plugins.push(new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV) || 'dev'
     }));
-    runSequence('views', 'sass', 'js', 'images', 'fonts', function() {
+    runSequence('views', 'sass', 'js', 'images', 'fonts', () => {
         browserSync.init(dist.views, {
             startPath: "/views/",
             server: {
@@ -134,23 +134,23 @@ gulp.task('reload', function() {
 
 
 function dev() {
-    watch([src.views], function() {
-        runSequence('views', function() {
+    watch([src.views], () => {
+        runSequence('views', () => {
             bsReload()
         });
     });
-    watch([src.sass], function() {
-        runSequence('sass', function() {
+    watch([src.sass], () => {
+        runSequence('sass', () => {
             bsReload();
         });
     });
-    watch([src.images], function() {
-        runSequence('images', function() {
+    watch([src.images], () => {
+        runSequence('images', () => {
             bsReload()
         });
     });
-    watch([src.fonts], function() {
-        runSequence('fonts', function() {
+    watch([src.fonts], () => {
+        runSequence('fonts', () => {
             bsReload()
         });
     });
@@ -167,27 +167,27 @@ function dev() {
 }
 
 
-gulp.task('js', function() {
+gulp.task('js', () => {
     cp('./src/js/lib/*.js', './dist/js/lib');
     return compileJS(['./src/js/**/*.js', '!./src/js/lib/*.js']);
 });
 
-gulp.task('images', function() {
+gulp.task('images', () => {
     gulp.src(src.images)
         // 增量更新，加快gulp构建速度
         .pipe(newer(dist.images))
         .pipe(gulp.dest(dist.images));
 });
-gulp.task('fonts', function() {
+gulp.task('fonts', () => {
     return gulp.src(src.fonts)
         .pipe(newer(dist.fonts))
         .pipe(gulp.dest(dist.fonts));
 });
-gulp.task('js:build', function() {
+gulp.task('js:build', () => {
     cp('./src/js/lib/*.js', './src/tmp/js/lib');
     return compileJS(['./src/js/**/*.js', '!./src/js/lib/*.js'], './src/tmp');
 });
-gulp.task('ugjs:build', function() {
+gulp.task('ugjs:build', () => {
     return gulp.src('./src/tmp/**/*.js')
         .pipe(ifElse(BUILD === 'build', ugjs))
         .pipe(rev())
@@ -222,7 +222,7 @@ function cp(from, to) {
         .pipe(gulp.dest(to));
 }
 
-gulp.task('views:build', function() {
+gulp.task('views:build', () => {
     return gulp.src(['./dist/**/*.json', src.views])
         .pipe(revCollector({
             replaceReved: true
@@ -232,22 +232,22 @@ gulp.task('views:build', function() {
         .pipe(gulp.dest(dist.views));
 });
 
-gulp.task('build', function() {
+gulp.task('build', () => {
     BUILD = 'build';
     webpackConfig.plugins.push(new webpack.DefinePlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV) || 'production'
     }));
-    build(function() {
+    build(() => {
         del(['./src/tmp'])
     });
 });
-gulp.task('css:build', function() {
+gulp.task('css:build', () => {
     return gulp.src(src.css)
         .pipe(base64({
             extensions: ['png', /\.jpg#datauri$/i],
             maxImageSize: 10 * 1024 // bytes,
         }))
-        .pipe(ifElse(BUILD === 'build', function() {
+        .pipe(ifElse(BUILD === 'build', () => {
             return postcss(processes)
         }))
         .pipe(rev())
@@ -258,17 +258,17 @@ gulp.task('css:build', function() {
 });
 
 function build(cb) {
-    runSequence('clean', 'sass', 'css:build', 'js:build', 'ugjs:build', 'views:build', 'images', 'fonts', 'cleancss', function() {
+    runSequence('clean', 'sass', 'css:build', 'js:build', 'ugjs:build', 'views:build', 'images', 'fonts', 'cleancss', () => {
         cb && cb();
     });
 }
-gulp.task('clean', function() {
+gulp.task('clean', () => {
     del([
         'dist/**/*'
     ]);
 
 });
-gulp.task('cleancss', function() {
+gulp.task('cleancss', () => {
     del([
         'src/css'
     ]);
@@ -276,11 +276,11 @@ gulp.task('cleancss', function() {
 });
 
 /* 单元测试 单独出来 */
-gulp.task('mocha', function() {
+gulp.task('mocha', () => {
     return gulp.src(['test/*.js'], { read: false })
         .pipe(mocha({ reporter: 'nyan' }))
 });
 
-gulp.task('test', function() {
+gulp.task('test', () => {
     gulp.watch(['lib/**', 'test/**'], ['mocha']);
 });

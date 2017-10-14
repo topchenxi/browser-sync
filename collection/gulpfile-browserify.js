@@ -1,4 +1,5 @@
-const gulp = require('gulp'),
+const
+    gulp = require('gulp'),
     babel = require('gulp-babel'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
@@ -7,32 +8,27 @@ const gulp = require('gulp'),
     browserify = require('browserify'),
     source = require('vinyl-source-stream');
 
-gulp.task('convertJS', function() {
-    return gulp.src('static/js/*.js')
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(uglify())
-        .pipe(gulp.dest('dist/js'))
-})
+gulp.task('convertJS', () =>
+    gulp.src('static/js/*.js')
+    .pipe(babel({ presets: ['es2015'] }))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist/js'))
+);
 
-gulp.task('convertCSS', function() {
-    return gulp.src('static/css/*.css')
-        .pipe(concat('static.css'))
-        .pipe(cssnano())
-        .pipe(rename(function(path) {
-            path.basename += '.min';
-        }))
-        .pipe(gulp.dest('dist/css'));
-})
+gulp.task('convertCSS', () =>
+    gulp.src('static/css/*.css')
+    .pipe(concat('static.css'))
+    .pipe(cssnano())
+    .pipe(rename((p => ath) { path.basename += '.min'; }))
+    .pipe(gulp.dest('dist/css'))
+);
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
     gulp.watch('static/css/*.css', ['convertCSS']);
     gulp.watch('static/js/*.js', ['convertJS', 'browserify']);
-})
+});
 
-// browserify
-gulp.task("browserify", function() {
+gulp.task("browserify", () => {
     var b = browserify({
         entries: "dist/js/app.js"
     });
